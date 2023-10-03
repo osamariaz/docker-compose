@@ -1,0 +1,26 @@
+version: '1'
+services:
+  web:     
+    build: master/.
+    ports:
+      - "8055:8080"
+    volumes:
+      - jenkins:/var/jenkins_home
+
+  ubuntu-container:
+    build: node1/.
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    networks:
+      - "mynetwork"
+
+  ubuntu-container-2:
+    build: node2/.
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    networks:
+      - "mynetwork"
+networks:
+  mynetwork:
+volumes:
+  jenkins:
